@@ -6,6 +6,7 @@ package sistemagestaohospitalar;
     //solicitar crm do médico e verificar se está cadastrado no sistema. ("LOGIN")
     //Talvez atribuir o método de alterar status no controller de medicos
 public class Atendimento {
+    private int id;
     private String status;
     private Paciente paciente;
     private Medico medico;
@@ -14,7 +15,8 @@ public class Atendimento {
         this.status = "Entrada";
     }
 
-    public Atendimento(Paciente paciente, Medico medico) {
+    public Atendimento(int id, Paciente paciente, Medico medico) {
+        this.id = id;
         this.paciente = paciente;
         this.medico = medico;
     }

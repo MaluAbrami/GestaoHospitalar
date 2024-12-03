@@ -1,5 +1,7 @@
 package sistemagestaohospitalar;
 
+import Service.GerenciaMedicos;
+import Service.GerenciaPacientes;
 import java.util.Scanner;
 
 public class SistemaGestaoHospitalar {

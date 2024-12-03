@@ -7,26 +7,14 @@ package sistemagestaohospitalar;
     //Talvez atribuir o método de alterar status no controller de medicos
 public class Atendimento {
     private int id;
-    private String status;
+    private int contadorId = 1;
     private Paciente paciente;
     private Medico medico;
+    private Estado estadoAtual;
     
-    public Atendimento(){ //Construtor inicial, define o valor inicial de entrada assim que o pacinte entra no hospital
-        this.status = "Entrada";
-    }
-
-    public Atendimento(int id, Paciente paciente, Medico medico) {
-        this.id = id;
-        this.paciente = paciente;
-        this.medico = medico;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) { 
-        this.status = status;
+    public Atendimento(){
+        this.id = contadorId++;
+        this.estadoAtual = Estado.Entrada;
     }
 
     public Paciente getPaciente() {
@@ -45,5 +33,20 @@ public class Atendimento {
         this.medico = medico;
     }
     
+    public void adicionarPaciente(Paciente p){
+        paciente = p;
+    }
     
+    public void adicionarMedico(Medico m){
+        medico = m;
+    }
+
+    public Estado getEstadoAtual() {
+        return estadoAtual;
+    }
+
+    public void setEstadoAtual(Estado estadoAtual) {
+        this.estadoAtual = estadoAtual;
+    }
+
 }

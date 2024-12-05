@@ -3,17 +3,17 @@ package Service;
 import java.util.Scanner;
 import sistemagestaohospitalar.Medico;
 
-public class GerenciaMedicos {
+public class MedicosService {
     private Medico medicos[];
     private Scanner ent;
     
-    public GerenciaMedicos(Medico meds[]){
+    public MedicosService(Medico meds[]){
         medicos = meds;
         ent = new Scanner(System.in);
     }
     
     public void cadastrar(){
-        String nome, id, cpf, end, tel, crm, esp, ctps;
+        String nome, id, cpf, end, tel, crm, esp, ctps, senha;
         
         // Verifica se existem posições vazias no vetor.
         int i = 0;
@@ -38,8 +38,10 @@ public class GerenciaMedicos {
             esp = ent.nextLine();
             System.out.println("C.T.P.S.: ");
             ctps = ent.nextLine();
+            System.out.println("Senha de acesso: ");
+            senha = ent.nextLine();
             
-            medicos[i] = new Medico(nome, id, cpf, end, tel, crm, esp, ctps);
+            medicos[i] = new Medico(nome, id, cpf, end, tel, crm, esp, ctps, senha);
         }
         else{
             System.out.println("Vetor cheio.");

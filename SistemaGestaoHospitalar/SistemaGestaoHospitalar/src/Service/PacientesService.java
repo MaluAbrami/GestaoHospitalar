@@ -3,11 +3,11 @@ package Service;
 import java.util.Scanner;
 import sistemagestaohospitalar.Paciente;
 
-public class GerenciaPacientes {
+public class PacientesService {
     private Paciente pacientes[];
     private Scanner ent;
     
-    public GerenciaPacientes(Paciente pacs[]){
+    public PacientesService(Paciente pacs[]){
         pacientes = pacs;
         ent = new Scanner(System.in);
     }

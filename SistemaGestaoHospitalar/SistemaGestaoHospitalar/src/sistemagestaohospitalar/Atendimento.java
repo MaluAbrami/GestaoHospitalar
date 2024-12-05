@@ -1,10 +1,5 @@
 package sistemagestaohospitalar;
 
-//PERMITIR QUE APENAS O MÉDICO ALTERE O STATUS DO ATENDIMENTO DO PACIENTE
-//ALGUM MEDICO SERA DESIGNADO PARA ATENDER ESSE PACIENTE E DEPOIS SERA APENAS ELE QUE ATENDERA
-//POSSÍVEIS VALIDAÇÕES
-    //solicitar crm do médico e verificar se está cadastrado no sistema. ("LOGIN")
-    //Talvez atribuir o método de alterar status no controller de medicos
 public class Atendimento {
     private int id;
     private int contadorId = 1;
@@ -15,6 +10,10 @@ public class Atendimento {
     public Atendimento(){
         this.id = contadorId++;
         this.estadoAtual = Estado.Entrada;
+    }
+    
+    public int getId(){
+        return id;
     }
 
     public Paciente getPaciente() {

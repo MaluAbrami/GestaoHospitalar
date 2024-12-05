@@ -1,7 +1,7 @@
 package sistemagestaohospitalar;
 
-import Service.GerenciaMedicos;
-import Service.GerenciaPacientes;
+import Service.MedicosService;
+import Service.PacientesService;
 import java.util.Scanner;
 
 public class SistemaGestaoHospitalar {
@@ -13,8 +13,8 @@ public class SistemaGestaoHospitalar {
         Paciente pacientes[] = new Paciente[100];
         Medico medicos[] = new Medico[100];
 
-        GerenciaMedicos gm = new GerenciaMedicos(medicos);
-        GerenciaPacientes gp = new GerenciaPacientes(pacientes);
+        MedicosService gm = new MedicosService(medicos);
+        PacientesService gp = new PacientesService(pacientes);
 
         int op1, op2;
 

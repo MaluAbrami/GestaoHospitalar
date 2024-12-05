@@ -1,6 +1,6 @@
 package sistemagestaohospitalar;
 
-public class Pessoa {
+public abstract class Pessoa {
     private String nome;
     private String identidade;
     private String cpf;

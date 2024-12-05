@@ -1,51 +1,48 @@
 package Service;
 
+import DaoImpl.MedicoDaoImpl;
 import java.util.Scanner;
 import sistemagestaohospitalar.Medico;
 
 public class MedicosService {
-    private Medico medicos[];
-    private Scanner ent;
+    private MedicoDaoImpl medicoDao;
+    private Scanner scanner;
     
-    public MedicosService(Medico meds[]){
-        medicos = meds;
-        ent = new Scanner(System.in);
+    public MedicosService(MedicoDaoImpl medicoDao, Scanner scanner){
+        this.medicoDao = medicoDao;
+        this.scanner = scanner;
     }
     
     public void cadastrar(){
         String nome, id, cpf, end, tel, crm, esp, ctps, senha;
         
-        // Verifica se existem posições vazias no vetor.
-        int i = 0;
-        while((i < medicos.length) && (medicos[i] != null)){
-            i++;
-        }
-        if(i < medicos.length){
-            System.out.println("--==[Cadastro de Médicos]==--");
-            System.out.println("Nome: ");
-            nome = ent.nextLine();
-            System.out.println("Identidade: ");
-            id = ent.nextLine();
-            System.out.println("C.P.F.: ");
-            cpf = ent.nextLine();
-            System.out.println("Endereço: ");
-            end = ent.nextLine();
-            System.out.println("Telefone: ");
-            tel = ent.nextLine();
-            System.out.println("C.R.M.: ");
-            crm = ent.nextLine();
-            System.out.println("Especialidade: ");
-            esp = ent.nextLine();
-            System.out.println("C.T.P.S.: ");
-            ctps = ent.nextLine();
-            System.out.println("Senha de acesso: ");
-            senha = ent.nextLine();
-            
-            medicos[i] = new Medico(nome, id, cpf, end, tel, crm, esp, ctps, senha);
-        }
-        else{
-            System.out.println("Vetor cheio.");
-        }
+        System.out.println("--==[Cadastro de Médicos]==--");
+        System.out.println("Nome: ");
+        nome = scanner.nextLine();
+        System.out.println("Identidade: ");
+        id = scanner.nextLine();
+        System.out.println("C.P.F.: ");
+        cpf = scanner.nextLine();
+        System.out.println("Endereço: ");
+        end = scanner.nextLine();
+        System.out.println("Telefone: ");
+        tel = scanner.nextLine();
+        System.out.println("C.R.M.: ");
+        crm = scanner.nextLine();
+        System.out.println("Especialidade: ");
+        esp = scanner.nextLine();
+        System.out.println("C.T.P.S.: ");
+        ctps = scanner.nextLine();
+        System.out.println("Senha de acesso: ");
+        senha = scanner.nextLine();
+
+        Medico novoMedico = new Medico(nome, id, cpf, end, tel, crm, esp, ctps, senha);
+        boolean retorno = medicoDao.adicionar(novoMedico);
+        
+        if(retorno)
+            System.out.println("Medico adicionado com sucesso!");
+        else
+            System.out.println("Erro: identidade, crm ou ctps ja cadastrados");
     }
     
     public void alterar(){

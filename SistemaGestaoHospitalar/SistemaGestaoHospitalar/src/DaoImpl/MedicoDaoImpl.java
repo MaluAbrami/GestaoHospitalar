@@ -13,8 +13,16 @@ public class MedicoDaoImpl implements MedicoDao{
     }
     
     @Override
-    public void adicionar(Medico m) {
+    public boolean adicionar(Medico m) {
+        for (Medico medicoExistente : medicos) {
+            if (medicoExistente.getIdentidade().equals(m.getIdentidade()) || 
+                medicoExistente.getCrm().equals(m.getCrm()) ||
+                medicoExistente.getCtps().equals(m.getCtps())) {
+                return false; // Impede o cadastro
+            } 
+        }
         medicos.add(m);
+        return true;
     }
 
     @Override

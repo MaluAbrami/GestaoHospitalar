@@ -56,12 +56,10 @@ public class MedicoDaoImpl implements MedicoDao{
     }
 
     @Override
-    public Medico[] listar() {
-        Medico[] listaDeMedicos = null;
-        for(int i = 0; i < medicos.size(); i++){
-            listaDeMedicos[i] = medicos.get(i);
+    public void listar() {
+        for(Medico m: medicos){
+            System.out.println(m.imprimir());
         }
-        return listaDeMedicos;
     }
 
     @Override

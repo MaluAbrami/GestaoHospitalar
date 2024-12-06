@@ -29,6 +29,13 @@ public class PacienteDaoImpl implements PacienteDao{
     public boolean atualizar(Paciente p) {
         Paciente pacienteAlterar = buscar(p.getCpf());
         if(pacienteAlterar != null){
+            for(Paciente pacienteExistente: pacientes){
+                if(pacienteExistente.getIdentidade().equals(p.getIdentidade())
+                        || pacienteExistente.getCpf().equals(p.getCpf())
+                        || pacienteExistente.getNumeroConvenio().equals(p.getNumeroConvenio())){
+                    return false;
+                }
+            }
             int posicao = pacientes.indexOf(pacienteAlterar);
             pacientes.set(posicao, p);
             return true;

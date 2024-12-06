@@ -32,6 +32,7 @@ public class MedicoDaoImpl implements MedicoDao{
         if(medicoAlterar != null){
             for (Medico medicoExistente : medicos) {
                 if (medicoExistente.getIdentidade().equals(m.getIdentidade())
+                        || medicoExistente.getCpf().equals(m.getCpf())
                         || medicoExistente.getCrm().equals(m.getCrm())
                         || medicoExistente.getCtps().equals(m.getCtps())) {
                     return false; // Impede a atualizacao por duplicidade de dados

@@ -166,7 +166,7 @@ public class MedicosService {
         Medico procuraMedico = medicoDao.buscar(cpf);
         
         System.out.println("-=[Dados do Medico]=-");
-        procuraMedico.imprimir();
+        System.out.println(procuraMedico.imprimir());
         System.out.println("\nConfirma exclusao? (1-sim/2-nao)");
         resp = scanner.nextInt();
         scanner.skip("\n");
@@ -174,7 +174,7 @@ public class MedicosService {
         if (resp == 1) {
             boolean retorno = medicoDao.deletar(cpf);
             if (retorno) {
-                System.out.println("Exclusao efetuada com sucesso.");
+                System.out.println("Medico deletado com sucesso.");
             } else {
                 System.out.println("Erro: nao tem nenhum medico cadastrado com esse cpf.");
             }

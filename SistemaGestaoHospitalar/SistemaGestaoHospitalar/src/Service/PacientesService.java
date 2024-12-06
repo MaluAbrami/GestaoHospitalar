@@ -27,9 +27,9 @@ public class PacientesService {
         end = scanner.nextLine();
         System.out.println("Telefone: ");
         tel = scanner.nextLine();
-        System.out.println("Nome Convênio: ");
+        System.out.println("Nome Convenio: ");
         nomeConv = scanner.nextLine();
-        System.out.println("Número Convênio: ");
+        System.out.println("Número Convenio: ");
         numConv = scanner.nextLine();
         
         Paciente novoPaciente = new Paciente(nome, id, cpf, end, tel, nomeConv, numConv);
@@ -43,10 +43,10 @@ public class PacientesService {
     }
     
     public void alterar(){
-        String nome = null, id = null, cpf = null, end = null, tel = null, nomeConv = null, numConv = null;
+        String nome = null, id = null, cpf, end = null, tel = null, nomeConv = null, numConv = null;
         int resp;
         
-        System.out.println("--==[Alteração de Pacientes]==--");
+        System.out.println("--==[Alteracao de Pacientes]==--");
         System.out.println("Qual o cpf do paciente que deseja alterar? ");
         cpf = scanner.nextLine();
         
@@ -58,7 +58,7 @@ public class PacientesService {
         if(procuraPaciente != null){
             System.out.println("-=[Dados]=-");
             System.out.println("Nome atual: " + procuraPaciente.getNome());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
@@ -67,7 +67,7 @@ public class PacientesService {
             }
             System.out.println("----------------------------------");
             System.out.println("Identidade atual: " + procuraPaciente.getIdentidade());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
@@ -76,7 +76,7 @@ public class PacientesService {
             }
             System.out.println("----------------------------------");
             System.out.println("C.P.F. atual: " + procuraPaciente.getCpf());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
@@ -84,17 +84,17 @@ public class PacientesService {
                 cpf = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Endereço atual: " + procuraPaciente.getEndereco());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Endereco atual: " + procuraPaciente.getEndereco());
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
-                System.out.println("Digite o novo Endereço: ");
+                System.out.println("Digite o novo Endereco: ");
                 end = scanner.nextLine();
             }
             System.out.println("----------------------------------");
             System.out.println("Telefone atual: " + procuraPaciente.getTelefone());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
@@ -102,21 +102,21 @@ public class PacientesService {
                 tel = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Nome do Convêncio atual: " + procuraPaciente.getNomeConvenio());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Nome do Convenio atual: " + procuraPaciente.getNomeConvenio());
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
-                System.out.println("Digite o novo Nome do Convênio: ");
+                System.out.println("Digite o novo Nome do Convenio: ");
                 nomeConv = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Número do Convêncio atual: " + procuraPaciente.getNumeroConvenio());
-            System.out.println("Alterar? (1-sim/2-não");
+            System.out.println("Numero do Convenio atual: " + procuraPaciente.getNumeroConvenio());
+            System.out.println("Alterar? (1-sim/2-nao");
             resp = scanner.nextInt();
             scanner.skip("\n");
             if(resp == 1){
-                System.out.println("Digite o novo Número do Convênio: ");
+                System.out.println("Digite o novo Numero do Convenio: ");
                 numConv = scanner.nextLine();
             }
             
@@ -136,44 +136,45 @@ public class PacientesService {
     }
     
     public void excluir(){
-        int pos, resp;
+        String cpf;
+        int resp;
         
-        System.out.println("--==[Exclusão de Pacientes]==--");
-        System.out.println("Qual posição deseja excluir? ");
-        pos = scanner.nextInt();
+        System.out.println("--==[Exclusao de Pacientes]==--");
+        System.out.println("Qual o cpf do paciente que deseja excluir? ");
+        cpf = scanner.nextLine();
+        
+        Paciente procuraPaciente = pacienteDao.buscar(cpf);
+
+        System.out.println("-=[Dados do Paciente]=-");
+        System.out.println(procuraPaciente.imprimir());
+        System.out.println("\nConfirma exclusao? (1-sim/2-nao)");
+        resp = scanner.nextInt();
         scanner.skip("\n");
-        
-        if(pacientes[pos] != null){
-            System.out.println("-=[Dados do Paciente]=-");
-            pacientes[pos].imprimir();
-            System.out.println("\nConfirma exclusão? (1-sim/2-não)");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            
-            if(resp == 1){
-                pacientes[pos] = null;
-                System.out.println("Exclusão efetuada com sucesso.");
+
+        if (resp == 1) {
+            boolean retorno = pacienteDao.deletar(cpf);
+            if(retorno){
+                System.out.println("Paciente deletado com sucesso.");
+            } else{
+                System.out.println("Erro: nao tem nenhum paciente cadastrado com esse cpf.");
             }
-            else{
-                System.out.println("Exclusão não efetuada.");
-            }
-        }
-        else{
-            System.out.println("Paciente não existe.");
+        } else {
+            System.out.println("Exclusao nao efetuada.");
         }
     }
     
     public void consultar(){
-        int pos;
+        String cpf;
         
         System.out.println("--==[Consulta de Pacientes]==--");
-        System.out.println("Qual posição deseja consultar? ");
-        pos = scanner.nextInt();
-        scanner.skip("\n");
+        System.out.println("Qual o cpf do paciente que deseja consultar? ");
+        cpf = scanner.nextLine();
         
-        if(pacientes[pos] != null){
+        Paciente procuraPaciente = pacienteDao.buscar(cpf);
+        
+        if(procuraPaciente != null){
             System.out.println("-=[Dados do Paciente]=-");
-            pacientes[pos].imprimir();
+            System.out.println(procuraPaciente.imprimir());
         }
         else{
             System.out.println("Paciente não existe.");
@@ -181,17 +182,7 @@ public class PacientesService {
     }
     
     public void relatorio(){
-        int pos = 0;
-        
-        System.out.println("--==[Relatório de Pacientes]==--");
-        
-        while(pos < pacientes.length){
-            if(pacientes[pos] != null){
-                pacientes[pos].imprimir();
-                System.out.println("\n-----------------------------------\n");
-            }
-            
-            pos++;
-        }
+        System.out.println("--==[Relatorio de Pacientes]==--");
+        pacienteDao.listar();
     }
 }

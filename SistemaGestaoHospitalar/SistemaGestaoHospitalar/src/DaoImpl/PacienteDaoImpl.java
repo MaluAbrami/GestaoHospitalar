@@ -56,12 +56,10 @@ public class PacienteDaoImpl implements PacienteDao{
     }
 
     @Override
-    public Paciente[] listar() {
-        Paciente[] listaDePacientes = null;
-        for(int i = 0; i < pacientes.size(); i++){
-            listaDePacientes[i] = pacientes.get(i);
+    public void listar() {
+        for(Paciente p: pacientes){
+            System.out.println(p.imprimir());
         }
-        return listaDePacientes;
     }
 
     @Override

@@ -6,6 +6,6 @@ public interface PacienteDao {
     boolean adicionar(Paciente p);
     boolean atualizar(Paciente p);
     boolean deletar(String cpf);
-    Paciente[] listar();
+    void listar();
     Paciente buscar(String cpf);
 }

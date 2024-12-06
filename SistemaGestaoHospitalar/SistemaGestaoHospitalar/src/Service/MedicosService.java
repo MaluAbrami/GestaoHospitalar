@@ -179,39 +179,30 @@ public class MedicosService {
                 System.out.println("Erro: nao tem nenhum medico cadastrado com esse cpf.");
             }
         } else {
-            System.out.println("Exclusão não efetuada.");
+            System.out.println("Exclusao nao efetuada.");
         }
     }
     
     public void consultar(){
-        int pos;
+        String cpf;
         
-        System.out.println("--==[Consulta de Médicos]==--");
-        System.out.println("Qual posição deseja consultar? ");
-        pos = scanner.nextInt();
-        scanner.skip("\n");
+        System.out.println("--==[Consulta de Medicos]==--");
+        System.out.println("Qual o cpf do medico que deseja consultar? ");
+        cpf = scanner.nextLine();
         
-        if(medicos[pos] != null){
-            System.out.println("-=[Dados do Médico]=-");
-            medicos[pos].imprimir();
+        Medico procuraMedico = medicoDao.buscar(cpf);
+        
+        if(procuraMedico != null){
+            System.out.println("-=[Dados do Medico]=-");
+            System.out.println(procuraMedico.imprimir());
         }
         else{
-            System.out.println("Médico não existe.");
+            System.out.println("Medico nao existe.");
         }
     }
     
     public void relatorio(){
-        int pos = 0;
-        
-        System.out.println("--==[Relatório de Médicos]==--");
-        
-        while(pos < medicos.length){
-            if(medicos[pos] != null){
-                medicos[pos].imprimir();
-                System.out.println("\n-----------------------------------\n");
-            }
-            
-            pos++;
-        }
+        System.out.println("--==[Relatorio de Medicos]==--");
+        medicoDao.listar();
     }
 }

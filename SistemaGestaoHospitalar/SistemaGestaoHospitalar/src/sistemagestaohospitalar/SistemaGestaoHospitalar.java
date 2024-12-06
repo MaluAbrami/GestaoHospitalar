@@ -1,7 +1,9 @@
 package sistemagestaohospitalar;
 
+import DaoImpl.AtendimentoDaoImpl;
 import DaoImpl.MedicoDaoImpl;
 import DaoImpl.PacienteDaoImpl;
+import Service.AtendimentoService;
 import Service.MedicosService;
 import Service.PacientesService;
 import Views.MainView;
@@ -16,9 +18,11 @@ public class SistemaGestaoHospitalar {
         
         MedicoDaoImpl medicoDao = new MedicoDaoImpl();
         PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
+        AtendimentoDaoImpl atendimentoDao = new AtendimentoDaoImpl();
 
+        AtendimentoService atendimentoService = new AtendimentoService(atendimentoDao, medicoDao, pacienteDao);
         MedicosService medicoService = new MedicosService(medicoDao, scanner);
-        PacientesService pacienteService = new PacientesService(pacienteDao, scanner);
+        PacientesService pacienteService = new PacientesService(atendimentoService, pacienteDao, scanner);
         
         MedicoView medicoView = new MedicoView(medicoService, scanner);
         PacienteView pacienteView = new PacienteView(pacienteService, scanner);

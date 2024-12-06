@@ -10,12 +10,9 @@ public class SistemaGestaoHospitalar {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        
         MedicoDaoImpl medicoDao = new MedicoDaoImpl();
         PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
-        
-        // Vetores.
-        Paciente pacientes[] = new Paciente[100];
-        Medico medicos[] = new Medico[100];
 
         MedicosService gm = new MedicosService(medicoDao, scanner);
         PacientesService gp = new PacientesService(pacienteDao, scanner);
@@ -23,8 +20,8 @@ public class SistemaGestaoHospitalar {
         int op1, op2;
 
         do {
-            System.out.println("--==[Gestão Hospitalar]==--");
-            System.out.println("1 - Médicos");
+            System.out.println("--==[Gestao Hospitalar]==--");
+            System.out.println("1 - Medicos");
             System.out.println("2 - Pacientes");
             System.out.println("3 - Sair");
             System.out.println("Opção: ");
@@ -34,14 +31,14 @@ public class SistemaGestaoHospitalar {
             switch (op1) {
                 case 1:
                     do {
-                        System.out.println("--==[Médicos]==--");
+                        System.out.println("--==[Medicos]==--");
                         System.out.println("1 - Cadastrar");
                         System.out.println("2 - Alterar");
                         System.out.println("3 - Excluir");
                         System.out.println("4 - Consultar");
-                        System.out.println("5 - Relatório");
+                        System.out.println("5 - Relatorio");
                         System.out.println("6 - Voltar ao menu principal");
-                        System.out.println("Opção: ");
+                        System.out.println("Opcao: ");
                         op2 = scanner.nextInt();
                         scanner.skip("\n");
 
@@ -70,9 +67,9 @@ public class SistemaGestaoHospitalar {
                         System.out.println("2 - Alterar");
                         System.out.println("3 - Excluir");
                         System.out.println("4 - Consultar");
-                        System.out.println("5 - Relatório");
+                        System.out.println("5 - Relatorio");
                         System.out.println("6 - Voltar ao menu principal");
-                        System.out.println("Opção: ");
+                        System.out.println("Opcao: ");
                         op2 = scanner.nextInt();
                         scanner.skip("\n");
 

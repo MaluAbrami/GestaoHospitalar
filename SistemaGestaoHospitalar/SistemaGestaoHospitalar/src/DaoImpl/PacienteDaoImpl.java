@@ -56,10 +56,8 @@ public class PacienteDaoImpl implements PacienteDao{
     }
 
     @Override
-    public void listar() {
-        for(Paciente p: pacientes){
-            System.out.println(p.imprimir());
-        }
+    public List<Paciente> listar() {
+        return pacientes;
     }
 
     @Override

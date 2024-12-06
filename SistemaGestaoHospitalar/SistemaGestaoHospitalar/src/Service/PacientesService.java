@@ -5,16 +5,18 @@ import java.util.Scanner;
 import sistemagestaohospitalar.Paciente;
 
 public class PacientesService {
-    private PacienteDaoImpl pacienteDao;
+    private AtendimentoService atendimentoService;
+    private PacienteDaoImpl pacienteDao; 
     private Scanner scanner;
     
-    public PacientesService(PacienteDaoImpl pacienteDao, Scanner scanner){
+    public PacientesService(AtendimentoService atendimentoService, PacienteDaoImpl pacienteDao, Scanner scanner){
+        this.atendimentoService = atendimentoService;
         this.pacienteDao = pacienteDao;
         this.scanner = scanner;
     }
     
     public void cadastrar(){
-        String nome, id, cpf, end, tel, nomeConv, numConv;
+        String nome, id, cpf, end, tel, nomeConv, numConv, medicoCrm;
 
         System.out.println("--==[Cadastro de Pacientes]==--");
         System.out.println("Nome: ");
@@ -36,7 +38,18 @@ public class PacientesService {
         boolean retorno = pacienteDao.adicionar(novoPaciente);
         
         if(retorno){
-            System.out.println("Paciente adicionado com sucesso!");
+            System.out.println("Paciente cadastrado com sucesso!");
+            
+            System.out.println("Deseja dar entrada no paciente? (1-sim/2-nao)");
+            int resp = scanner.nextInt();
+            scanner.skip("\n");
+            if(resp == 1){
+                System.out.println("C.R.M do Medico ao qual sera designado: ");
+                medicoCrm = scanner.nextLine();
+                atendimentoService.cadastrar(medicoCrm, novoPaciente);
+            } else{
+                System.out.println("Paciente nao deu entrada no hospital");
+            }
         } else{
             System.out.println("Erro: identidade, cpf ou numero de convenio ja cadastrados");
         }

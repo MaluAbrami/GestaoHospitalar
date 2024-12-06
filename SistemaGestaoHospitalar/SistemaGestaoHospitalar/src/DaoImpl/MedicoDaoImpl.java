@@ -58,10 +58,8 @@ public class MedicoDaoImpl implements MedicoDao{
     }
 
     @Override
-    public void listar() {
-        for(Medico m: medicos){
-            System.out.println(m.imprimir());
-        }
+    public List<Medico> listar() {
+        return medicos;
     }
 
     @Override

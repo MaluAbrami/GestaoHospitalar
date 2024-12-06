@@ -13,8 +13,16 @@ public class PacienteDaoImpl implements PacienteDao{
     }
     
     @Override
-    public void adicionar(Paciente p) {
+    public boolean adicionar(Paciente p) {
+        for(Paciente pacienteExistente: pacientes){
+            if(pacienteExistente.getIdentidade().equals(p.getIdentidade()) ||
+                    pacienteExistente.getCpf().equals(p.getCpf()) ||
+                    pacienteExistente.getNumeroConvenio().equals(p.getNumeroConvenio())){
+                return false;
+            }
+        }
         pacientes.add(p);
+        return true;
     }
 
     @Override

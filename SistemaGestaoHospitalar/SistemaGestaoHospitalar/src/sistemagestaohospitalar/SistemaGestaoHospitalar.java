@@ -1,5 +1,7 @@
 package sistemagestaohospitalar;
 
+import DaoImpl.MedicoDaoImpl;
+import DaoImpl.PacienteDaoImpl;
 import Service.MedicosService;
 import Service.PacientesService;
 import java.util.Scanner;
@@ -7,14 +9,16 @@ import java.util.Scanner;
 public class SistemaGestaoHospitalar {
 
     public static void main(String[] args) {
-        Scanner e = new Scanner(System.in);
-
+        Scanner scanner = new Scanner(System.in);
+        MedicoDaoImpl medicoDao = new MedicoDaoImpl();
+        PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
+        
         // Vetores.
         Paciente pacientes[] = new Paciente[100];
         Medico medicos[] = new Medico[100];
 
-        MedicosService gm = new MedicosService(medicos);
-        PacientesService gp = new PacientesService(pacientes);
+        MedicosService gm = new MedicosService(medicoDao, scanner);
+        PacientesService gp = new PacientesService(pacienteDao, scanner);
 
         int op1, op2;
 
@@ -24,8 +28,8 @@ public class SistemaGestaoHospitalar {
             System.out.println("2 - Pacientes");
             System.out.println("3 - Sair");
             System.out.println("Opção: ");
-            op1 = e.nextInt();
-            e.skip("\n");
+            op1 = scanner.nextInt();
+            scanner.skip("\n");
 
             switch (op1) {
                 case 1:
@@ -38,8 +42,8 @@ public class SistemaGestaoHospitalar {
                         System.out.println("5 - Relatório");
                         System.out.println("6 - Voltar ao menu principal");
                         System.out.println("Opção: ");
-                        op2 = e.nextInt();
-                        e.skip("\n");
+                        op2 = scanner.nextInt();
+                        scanner.skip("\n");
 
                         switch (op2) {
                             case 1:
@@ -69,8 +73,8 @@ public class SistemaGestaoHospitalar {
                         System.out.println("5 - Relatório");
                         System.out.println("6 - Voltar ao menu principal");
                         System.out.println("Opção: ");
-                        op2 = e.nextInt();
-                        e.skip("\n");
+                        op2 = scanner.nextInt();
+                        scanner.skip("\n");
 
                         switch (op2) {
                             case 1:

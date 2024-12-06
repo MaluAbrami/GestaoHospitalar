@@ -1,46 +1,44 @@
 package Service;
 
+import DaoImpl.PacienteDaoImpl;
 import java.util.Scanner;
 import sistemagestaohospitalar.Paciente;
 
 public class PacientesService {
-    private Paciente pacientes[];
-    private Scanner ent;
+    private PacienteDaoImpl pacienteDao;
+    private Scanner scanner;
     
-    public PacientesService(Paciente pacs[]){
-        pacientes = pacs;
-        ent = new Scanner(System.in);
+    public PacientesService(PacienteDaoImpl pacienteDao, Scanner scanner){
+        this.pacienteDao = pacienteDao;
+        this.scanner = scanner;
     }
     
     public void cadastrar(){
         String nome, id, cpf, end, tel, nomeConv, numConv;
+
+        System.out.println("--==[Cadastro de Pacientes]==--");
+        System.out.println("Nome: ");
+        nome = scanner.nextLine();
+        System.out.println("Identidade: ");
+        id = scanner.nextLine();
+        System.out.println("C.P.F.: ");
+        cpf = scanner.nextLine();
+        System.out.println("Endereço: ");
+        end = scanner.nextLine();
+        System.out.println("Telefone: ");
+        tel = scanner.nextLine();
+        System.out.println("Nome Convênio: ");
+        nomeConv = scanner.nextLine();
+        System.out.println("Número Convênio: ");
+        numConv = scanner.nextLine();
         
-        // Verifica se existem posições vazias no vetor.
-        int i = 0;
-        while((i < pacientes.length) && (pacientes[i] != null)){
-            i++;
-        }
-        if(i < pacientes.length){
-            System.out.println("--==[Cadastro de Pacientes]==--");
-            System.out.println("Nome: ");
-            nome = ent.nextLine();
-            System.out.println("Identidade: ");
-            id = ent.nextLine();
-            System.out.println("C.P.F.: ");
-            cpf = ent.nextLine();
-            System.out.println("Endereço: ");
-            end = ent.nextLine();
-            System.out.println("Telefone: ");
-            tel = ent.nextLine();
-            System.out.println("Nome Convênio: ");
-            nomeConv = ent.nextLine();
-            System.out.println("Número Convênio: ");
-            numConv = ent.nextLine();
-            
-            pacientes[i] = new Paciente(nome, id, cpf, end, tel, nomeConv, numConv);
-        }
-        else{
-            System.out.println("Vetor cheio.");
+        Paciente novoPaciente = new Paciente(nome, id, cpf, end, tel, nomeConv, numConv);
+        boolean retorno = pacienteDao.adicionar(novoPaciente);
+        
+        if(retorno){
+            System.out.println("Paciente adicionado com sucesso!");
+        } else{
+            System.out.println("Erro: identidade, cpf ou numero de convenio ja cadastrados");
         }
     }
     

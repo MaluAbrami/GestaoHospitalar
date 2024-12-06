@@ -6,6 +6,7 @@ import DaoImpl.PacienteDaoImpl;
 import Service.AtendimentoService;
 import Service.MedicosService;
 import Service.PacientesService;
+import Views.AtendimentoView;
 import Views.MainView;
 import Views.MedicoView;
 import Views.PacienteView;
@@ -26,7 +27,8 @@ public class SistemaGestaoHospitalar {
         
         MedicoView medicoView = new MedicoView(medicoService, scanner);
         PacienteView pacienteView = new PacienteView(pacienteService, scanner);
-        MainView mainView = new MainView(medicoView, pacienteView, scanner);
+        AtendimentoView atendimentoView = new AtendimentoView(atendimentoService, scanner);
+        MainView mainView = new MainView(medicoView, pacienteView, atendimentoView, scanner);
         
         mainView.menu();
         

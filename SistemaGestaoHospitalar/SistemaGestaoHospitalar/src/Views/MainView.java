@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class MainView {
     private MedicoView medicoView;
     private PacienteView pacienteView;
+    private AtendimentoView atendimentoView;
     private Scanner scanner;
     
-    public MainView(MedicoView medicoView, PacienteView pacienteView, Scanner scanner){
+    public MainView(MedicoView medicoView, PacienteView pacienteView, AtendimentoView atendimentoView, Scanner scanner){
         this.medicoView = medicoView;
         this.pacienteView = pacienteView;
+        this.atendimentoView = atendimentoView;
         this.scanner = scanner;
     }
     
@@ -20,7 +22,7 @@ public class MainView {
             System.out.println("--==[Gestao Hospitalar]==--");
             System.out.println("1 - Gerenciar Medicos");
             System.out.println("2 - Gerenciar Pacientes");
-            System.out.println("3 - Alterar Atendimento de Paciente");
+            System.out.println("3 - Gereciar Atendimentos");
             System.out.println("4 - Sair");
             System.out.println("Opção: ");
             
@@ -37,7 +39,7 @@ public class MainView {
                     break;
                 }
                 case 3:{
-                    //IMPLENTAR LOGIN DE MEDICO PARA IMPEDIR OUTROS ACESSOS
+                    atendimentoView.menu();
                     break;
                 }
                 case 4:{

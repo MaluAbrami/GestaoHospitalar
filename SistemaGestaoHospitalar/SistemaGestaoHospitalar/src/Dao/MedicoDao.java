@@ -6,7 +6,7 @@ public interface MedicoDao {
     boolean adicionar(Medico m);
     boolean atualizar(Medico m);
     boolean deletar(String cpf);
-    Medico[] listar();
+    void listar();
     Medico buscar(String cpf);
     boolean login(String crm, String senha);
 }

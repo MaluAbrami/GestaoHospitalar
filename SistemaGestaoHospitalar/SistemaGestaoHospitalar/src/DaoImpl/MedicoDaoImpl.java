@@ -15,11 +15,11 @@ public class MedicoDaoImpl implements MedicoDao{
     @Override
     public boolean adicionar(Medico m) {
         for (Medico medicoExistente : medicos) {
-            if (medicoExistente.getIdentidade().equals(m.getIdentidade()) || 
-                medicoExistente.getCrm().equals(m.getCrm()) ||
-                medicoExistente.getCtps().equals(m.getCtps())) {
-                return false; // Impede o cadastro
-            } 
+            if (medicoExistente.getIdentidade().equals(m.getIdentidade())
+                    || medicoExistente.getCrm().equals(m.getCrm())
+                    || medicoExistente.getCtps().equals(m.getCtps())) {
+                return false; // Impede o cadastro por duplicidade de dados
+            }
         }
         medicos.add(m);
         return true;
@@ -29,6 +29,13 @@ public class MedicoDaoImpl implements MedicoDao{
     public boolean atualizar(Medico m) {
         Medico medicoAlterar = buscar(m.getCpf());
         if(medicoAlterar != null){
+            for (Medico medicoExistente : medicos) {
+                if (medicoExistente.getIdentidade().equals(m.getIdentidade())
+                        || medicoExistente.getCrm().equals(m.getCrm())
+                        || medicoExistente.getCtps().equals(m.getCtps())) {
+                    return false; // Impede a atualizacao por duplicidade de dados
+                }
+            }
             int posicao = medicos.indexOf(medicoAlterar);
             medicos.set(posicao, m);
             return true;

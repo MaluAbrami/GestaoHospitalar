@@ -56,7 +56,7 @@ public class MedicosService {
         Medico procuraMedico = medicoDao.buscar(cpf);
         Medico medicoAtualizado;
         
-        cpf = null; //caso nao altere o cpf do medico
+        cpf = null; //caso o usuario nao queira alterar o cpf do medico
         
         if(procuraMedico != null){
             System.out.println("-=[Dados]=-");
@@ -148,7 +148,7 @@ public class MedicosService {
             if(retorno){
                 System.out.println("Medico atualizado com sucesso.");
             } else{
-                System.out.println("Erro: identidade, crm ou ctps ja cadastrados");
+                System.out.println("Erro: identidade, cpf, crm ou ctps ja cadastrados");
             }
         } else{
             System.out.println("Erro: medico nao cadastrado");

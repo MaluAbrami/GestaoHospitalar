@@ -16,6 +16,7 @@ public class MedicoDaoImpl implements MedicoDao{
     public boolean adicionar(Medico m) {
         for (Medico medicoExistente : medicos) {
             if (medicoExistente.getIdentidade().equals(m.getIdentidade())
+                    || medicoExistente.getCpf().equals(m.getCpf())
                     || medicoExistente.getCrm().equals(m.getCrm())
                     || medicoExistente.getCtps().equals(m.getCtps())) {
                 return false; // Impede o cadastro por duplicidade de dados

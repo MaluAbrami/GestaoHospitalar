@@ -43,90 +43,95 @@ public class PacientesService {
     }
     
     public void alterar(){
-        String nome, id, cpf, end, tel, nomeConv, numConv;
-        int pos, resp;
+        String nome = null, id = null, cpf = null, end = null, tel = null, nomeConv = null, numConv = null;
+        int resp;
         
         System.out.println("--==[Alteração de Pacientes]==--");
-        System.out.println("Qual posição deseja alterar? ");
-        pos = ent.nextInt();
-        ent.skip("\n");
-        if(pacientes[pos] != null){
+        System.out.println("Qual o cpf do paciente que deseja alterar? ");
+        cpf = scanner.nextLine();
+        
+        Paciente procuraPaciente = pacienteDao.buscar(cpf);
+        Paciente pacienteAtualizado;
+        
+        cpf = null; //caso o usuario nao queira alterar o cpf do paciente
+        
+        if(procuraPaciente != null){
             System.out.println("-=[Dados]=-");
-            System.out.println("Nome atual: " + pacientes[pos].getNome());
+            System.out.println("Nome atual: " + procuraPaciente.getNome());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite o novo nome: ");
-                nome = ent.nextLine();
-                pacientes[pos].setNome(nome);
+                nome = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Identidade atual: " + pacientes[pos].getIdentidade());
+            System.out.println("Identidade atual: " + procuraPaciente.getIdentidade());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite a nova identidade: ");
-                id = ent.nextLine();
-                pacientes[pos].setIdentidade(id);
+                id = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("C.P.F. atual: " + pacientes[pos].getCpf());
+            System.out.println("C.P.F. atual: " + procuraPaciente.getCpf());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite o novo C.P.F.: ");
-                cpf = ent.nextLine();
-                pacientes[pos].setCpf(cpf);
+                cpf = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Endereço atual: " + pacientes[pos].getEndereco());
+            System.out.println("Endereço atual: " + procuraPaciente.getEndereco());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite o novo Endereço: ");
-                end = ent.nextLine();
-                pacientes[pos].setEndereco(end);
+                end = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Telefone atual: " + pacientes[pos].getTelefone());
+            System.out.println("Telefone atual: " + procuraPaciente.getTelefone());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite o novo Telefone: ");
-                tel = ent.nextLine();
-                pacientes[pos].setTelefone(tel);
+                tel = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Nome do Convêncio atual: " + pacientes[pos].getNomeConvenio());
+            System.out.println("Nome do Convêncio atual: " + procuraPaciente.getNomeConvenio());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite o novo Nome do Convênio: ");
-                nomeConv = ent.nextLine();
-                pacientes[pos].setNomeConvenio(nomeConv);
+                nomeConv = scanner.nextLine();
             }
             System.out.println("----------------------------------");
-            System.out.println("Número do Convêncio atual: " + pacientes[pos].getNumeroConvenio());
+            System.out.println("Número do Convêncio atual: " + procuraPaciente.getNumeroConvenio());
             System.out.println("Alterar? (1-sim/2-não");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             if(resp == 1){
                 System.out.println("Digite o novo Número do Convênio: ");
-                numConv = ent.nextLine();
-                pacientes[pos].setNumeroConvenio(numConv);
+                numConv = scanner.nextLine();
             }
+            
             System.out.println("----------------------------------");
 
-            System.out.println("Atualização realizada com sucesso.");
+            pacienteAtualizado = new Paciente(nome, id, cpf, end, tel, nomeConv, numConv);
+            boolean retorno = pacienteDao.atualizar(pacienteAtualizado);
+            if(retorno){
+                System.out.println("Paciente atualizado com sucesso.");
+            } else{
+                System.out.println("Erro: identidade, cpf ou numero do convenio ja cadastrados");
+            }
         }
         else{
-            System.out.println("Vetor cheio.");
+            System.out.println("Erro: paciente nao cadastrado");
         }
     }
     
@@ -135,15 +140,15 @@ public class PacientesService {
         
         System.out.println("--==[Exclusão de Pacientes]==--");
         System.out.println("Qual posição deseja excluir? ");
-        pos = ent.nextInt();
-        ent.skip("\n");
+        pos = scanner.nextInt();
+        scanner.skip("\n");
         
         if(pacientes[pos] != null){
             System.out.println("-=[Dados do Paciente]=-");
             pacientes[pos].imprimir();
             System.out.println("\nConfirma exclusão? (1-sim/2-não)");
-            resp = ent.nextInt();
-            ent.skip("\n");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
             
             if(resp == 1){
                 pacientes[pos] = null;
@@ -163,8 +168,8 @@ public class PacientesService {
         
         System.out.println("--==[Consulta de Pacientes]==--");
         System.out.println("Qual posição deseja consultar? ");
-        pos = ent.nextInt();
-        ent.skip("\n");
+        pos = scanner.nextInt();
+        scanner.skip("\n");
         
         if(pacientes[pos] != null){
             System.out.println("-=[Dados do Paciente]=-");

@@ -21,10 +21,13 @@ public class AtendimentoService {
     
     public void cadastrar(String crm, Paciente p){
         List<Medico> medicosExistentes = medicoDao.listar();
+        Paciente procuraPaciente = pacienteDao.buscar(p.getCpf());
         
         if(medicosExistentes.isEmpty()){
             System.out.print("A lista de medicos cadastrados no sistema esta vazia");
-        }
+        } else if(procuraPaciente == null){
+            System.out.print("O paciente informado nao existe");
+        } 
         
         for(Medico m: medicosExistentes){
             if(m.getCrm().equals(m.getCrm())){

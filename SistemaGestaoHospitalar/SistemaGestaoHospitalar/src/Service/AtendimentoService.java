@@ -74,4 +74,27 @@ public class AtendimentoService {
             }
         }
     }
+    
+    public void alterarEstado(){
+        String medicoCrm, medicoSenha;
+        
+        System.out.println("--==[Alteracao de Estado do Atendimento]==--");
+        System.out.println("'Somente medicos podem realizar a alteracao do estado de um atendimento'");
+        
+        System.out.println("--==[LOGIN]==--");
+        System.out.println("Informe seu C.R.M.: ");
+        medicoCrm = scanner.nextLine();
+        scanner.skip("\n");
+        System.out.println("Informe sua Senha: ");
+        medicoSenha = scanner.nextLine();
+        scanner.skip("\n");
+        
+        boolean retorno = medicoDao.login(medicoCrm, medicoSenha);
+        
+        if(retorno){
+            
+        } else{
+            System.out.println("Erro: nao foi possivel realizar o login.\nVerifique se os dados informados estao corretos e tente novamente.");
+        }
+    }
 }

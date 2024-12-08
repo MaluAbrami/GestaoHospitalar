@@ -46,100 +46,28 @@ public class MedicosService {
     }
     
     public void alterar(){
-        String nome = null, id = null, cpf, end = null, tel = null, crm = null, esp = null, ctps = null, senha = null;
-        int resp;
-        
         System.out.println("--==[Alteracao de Medicos]==--");
         System.out.println("Qual o cpf do medico que deseja alterar? ");
-        cpf = scanner.nextLine();
+        String cpf = scanner.nextLine();
         
         Medico procuraMedico = medicoDao.buscar(cpf);
-        Medico medicoAtualizado;
         
-        cpf = null; //caso o usuario nao queira alterar o cpf do medico
-        
-        if(procuraMedico != null){
-            System.out.println("-=[Dados]=-");
-            System.out.println("Nome atual: " + procuraMedico.getNome());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo nome: ");
-                nome = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Identidade atual: " + procuraMedico.getIdentidade());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite a nova identidade: ");
-                id = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("C.P.F. atual: " + procuraMedico.getCpf());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo C.P.F.: ");
-                cpf = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Endereco atual: " + procuraMedico.getEndereco());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo Endereco: ");
-                end = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Telefone atual: " + procuraMedico.getTelefone());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo Telefone: ");
-                tel = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("C.R.M. atual: " + procuraMedico.getCrm());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo C.R.M.: ");
-                crm = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Especialidade atual: " + procuraMedico.getEspecialidade());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite a nova Especialidade: ");
-                esp = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("C.T.P.S. atual: " + procuraMedico.getCtps());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite a nova C.T.P.S.: ");
-                ctps = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Senha atual: " + procuraMedico.getSenha());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite a nova senha: ");
-                senha = scanner.nextLine();
-            }
+        if (procuraMedico != null) {
+            System.out.println("-=[Dados Atuais]=-");
+
+            String nome = capturaAlteracao("Nome", procuraMedico.getNome());
+            String id = capturaAlteracao("Identidade", procuraMedico.getIdentidade());
+            String novoCpf = capturaAlteracao("CPF", procuraMedico.getCpf());
+            String end = capturaAlteracao("Endereço", procuraMedico.getEndereco());
+            String tel = capturaAlteracao("Telefone", procuraMedico.getTelefone());
+            String crm = capturaAlteracao("CRM", procuraMedico.getCrm());
+            String esp = capturaAlteracao("Especialidade", procuraMedico.getEspecialidade());
+            String ctps = capturaAlteracao("CTPS", procuraMedico.getCtps());
+            String senha = capturaAlteracao("Senha", procuraMedico.getSenha());
+
+            Medico medicoAtualizado = new Medico(
+                    nome, id, novoCpf, end, tel, crm, esp, ctps, senha
+            );
             
             System.out.println("----------------------------------");
             
@@ -153,6 +81,18 @@ public class MedicosService {
         } else{
             System.out.println("Erro: medico nao cadastrado");
         }
+    }
+    
+    private String capturaAlteracao(String campo, String valorAtual) {
+        System.out.println(campo + " atual: " + valorAtual);
+        System.out.println("Alterar? (1-sim / 2-nao)");
+        int resp = scanner.nextInt();
+        scanner.nextLine(); // Consome a quebra de linha
+        if (resp == 1) {
+            System.out.println("Digite o novo " + campo + ":");
+            return scanner.nextLine();
+        }
+        return valorAtual; // Retorna o valor atual caso o usuário não deseje alterar
     }
     
     public void excluir(){

@@ -92,7 +92,7 @@ public class MedicosService {
             System.out.println("Digite o novo " + campo + ":");
             return scanner.nextLine();
         }
-        return valorAtual; // Retorna o valor atual caso o usuário não deseje alterar
+        return valorAtual; // Retorna o valor atual caso o usuario nao deseje alterar
     }
     
     public void excluir(){

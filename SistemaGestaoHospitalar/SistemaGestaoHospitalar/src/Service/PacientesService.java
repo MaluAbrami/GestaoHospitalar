@@ -56,86 +56,29 @@ public class PacientesService {
     }
     
     public void alterar(){
-        String nome = null, id = null, cpf, end = null, tel = null, nomeConv = null, numConv = null;
-        int resp;
-        
         System.out.println("--==[Alteracao de Pacientes]==--");
         System.out.println("Qual o cpf do paciente que deseja alterar? ");
-        cpf = scanner.nextLine();
+        String cpf = scanner.nextLine();
         
         Paciente procuraPaciente = pacienteDao.buscar(cpf);
-        Paciente pacienteAtualizado;
-        
-        cpf = null; //caso o usuario nao queira alterar o cpf do paciente
         
         if(procuraPaciente != null){
-            System.out.println("-=[Dados]=-");
-            System.out.println("Nome atual: " + procuraPaciente.getNome());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo nome: ");
-                nome = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Identidade atual: " + procuraPaciente.getIdentidade());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite a nova identidade: ");
-                id = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("C.P.F. atual: " + procuraPaciente.getCpf());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo C.P.F.: ");
-                cpf = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Endereco atual: " + procuraPaciente.getEndereco());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo Endereco: ");
-                end = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Telefone atual: " + procuraPaciente.getTelefone());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo Telefone: ");
-                tel = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Nome do Convenio atual: " + procuraPaciente.getNomeConvenio());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo Nome do Convenio: ");
-                nomeConv = scanner.nextLine();
-            }
-            System.out.println("----------------------------------");
-            System.out.println("Numero do Convenio atual: " + procuraPaciente.getNumeroConvenio());
-            System.out.println("Alterar? (1-sim/2-nao");
-            resp = scanner.nextInt();
-            scanner.skip("\n");
-            if(resp == 1){
-                System.out.println("Digite o novo Numero do Convenio: ");
-                numConv = scanner.nextLine();
-            }
+            System.out.println("-=[Dados Atuais]=-");
+            
+            String nome = capturaAlteracao("Nome", procuraPaciente.getNome());
+            String id = capturaAlteracao("Identidade", procuraPaciente.getIdentidade());
+            String novoCpf = capturaAlteracao("CPF", procuraPaciente.getCpf());
+            String end = capturaAlteracao("Endereço", procuraPaciente.getEndereco());
+            String tel = capturaAlteracao("Telefone", procuraPaciente.getTelefone());
+            String nomeConv = capturaAlteracao("Nome do Convenio", procuraPaciente.getNomeConvenio());
+            String numConv = capturaAlteracao("Numero do Convenio", procuraPaciente.getNumeroConvenio());
+            
+            Paciente pacienteAtualizado = new Paciente(
+                    nome, id, novoCpf, end, tel, nomeConv, numConv
+            );
             
             System.out.println("----------------------------------");
 
-            pacienteAtualizado = new Paciente(nome, id, cpf, end, tel, nomeConv, numConv);
             boolean retorno = pacienteDao.atualizar(pacienteAtualizado);
             if(retorno){
                 System.out.println("Paciente atualizado com sucesso.");
@@ -146,6 +89,18 @@ public class PacientesService {
         else{
             System.out.println("Erro: paciente nao cadastrado");
         }
+    }
+    
+    private String capturaAlteracao(String campo, String valorAtual) {
+        System.out.println(campo + " atual: " + valorAtual);
+        System.out.println("Alterar? (1-sim / 2-nao)");
+        int resp = scanner.nextInt();
+        scanner.nextLine(); // Consome a quebra de linha
+        if (resp == 1) {
+            System.out.println("Digite o novo " + campo + ":");
+            return scanner.nextLine();
+        }
+        return valorAtual; // Retorna o valor atual caso o usuario nao deseje alterar
     }
     
     public void excluir(){

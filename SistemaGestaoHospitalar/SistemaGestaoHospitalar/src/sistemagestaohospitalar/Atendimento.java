@@ -12,6 +12,10 @@ public class Atendimento {
         this.estadoAtual = Estado.Entrada;
     }
     
+    public Atendimento(Estado estadoAtual){
+        this.estadoAtual = estadoAtual;
+    }
+    
     public int getId(){
         return id;
     }

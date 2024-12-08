@@ -71,7 +71,6 @@ public class MedicosService {
             
             System.out.println("----------------------------------");
             
-            medicoAtualizado = new Medico(nome, id, cpf, end, tel, crm, esp, ctps, senha);
             boolean retorno = medicoDao.atualizar(medicoAtualizado);
             if(retorno){
                 System.out.println("Medico atualizado com sucesso.");

@@ -95,6 +95,7 @@ public class AtendimentoService {
         boolean retorno = medicoDao.login(medicoCrm, medicoSenha);
         
         if(retorno){
+            System.out.println("Login efetuado com sucesso!\nBem-vindo(a)!");
             System.out.println("ID do atendimento: ");
             idAtendimento = scanner.nextInt();
             scanner.skip("\n");
@@ -143,7 +144,7 @@ public class AtendimentoService {
                 if(novoEstado.equals(estadoAtual)){
                     System.out.println("Erro: o estado escolhido eh o mesmo que o estado atual do atendimento.");
                 } else{
-                    retorno = atendimentoDao.atualizar(atAtualizado);
+                    retorno = atendimentoDao.atualizar(idAtendimento, atAtualizado);
                     if(retorno)
                         System.out.println("Estado do Atendimento alterado com sucesso.");
                     else

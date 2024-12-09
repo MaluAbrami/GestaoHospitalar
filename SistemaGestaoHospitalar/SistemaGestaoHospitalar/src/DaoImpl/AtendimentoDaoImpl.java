@@ -20,8 +20,8 @@ public class AtendimentoDaoImpl implements AtendimentoDao{
     }
 
     @Override
-    public boolean atualizar(Atendimento at) {
-        Atendimento atendimentoExistente = buscar(at.getId());
+    public boolean atualizar(int id, Atendimento at) {
+        Atendimento atendimentoExistente = buscar(id);
         if(atendimentoExistente != null){
             int posicao = atendimentos.indexOf(atendimentoExistente);
             atendimentos.set(posicao, at);

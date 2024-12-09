@@ -26,7 +26,7 @@ public class PacientesService {
         id = scanner.nextLine();
         System.out.println("C.P.F.: ");
         cpf = scanner.nextLine();
-        System.out.println("Endereço: ");
+        System.out.println("Endereco: ");
         end = scanner.nextLine();
         System.out.println("Telefone: ");
         tel = scanner.nextLine();

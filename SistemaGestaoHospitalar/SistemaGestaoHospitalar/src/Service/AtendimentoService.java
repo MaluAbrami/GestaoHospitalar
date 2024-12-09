@@ -34,12 +34,16 @@ public class AtendimentoService {
         for(Medico m: medicosExistentes){
             if(m.getCrm().equals(crm)){
                 Atendimento at = new Atendimento();
-                atendimentoDao.adicionar(at);
-                at.adicionarMedico(m); //adiciona o medico ao atendimento
-                at.adicionarPaciente(p); //adiciona o paciente ao atendimento
-                System.out.println(at.getEstadoAtual().getDescricao());
-                System.out.println("Paciente: " + p.getNome() + ", Medico designado: " + m.getNome() + ", Especialidade do medico: " + m.getEspecialidade());
-                return;
+                boolean retorno = atendimentoDao.adicionar(at, m, p);
+                
+                if(retorno){
+                    System.out.println("Atendimento cadastrado com sucesso!");
+                    System.out.println(at.getEstadoAtual().getDescricao());
+                    System.out.println("Paciente: " + p.getNome() + ", Medico designado: " + m.getNome() + ", Especialidade do medico: " + m.getEspecialidade());    
+                    return;
+                } else{
+                    System.out.println("Erro: paciente ja esta cadastrado em um atendimento.");
+                }
             }
         }
         System.out.println("Erro: nao tem nenhum medico cadastrado com essa crm no sistema");
@@ -63,12 +67,16 @@ public class AtendimentoService {
                 for (Medico m : medicosExistentes) {
                     if (m.getCrm().equals(crmMedico)) {
                         Atendimento at = new Atendimento();
-                        atendimentoDao.adicionar(at);
-                        at.adicionarMedico(m); //adiciona o medico ao atendimento
-                        at.adicionarPaciente(pacienteExistente); //adiciona o paciente ao atendimento
-                        System.out.println(at.getEstadoAtual().getDescricao());
-                        System.out.println("Paciente: " + pacienteExistente.getNome() + ", Medico designado: " + m.getNome() + ", Especialidade do medico: " + m.getEspecialidade());
-                        return;
+                        boolean retorno = atendimentoDao.adicionar(at, m, pacienteExistente);
+                        
+                        if(retorno){
+                            System.out.println("Atendimento cadastrado com sucesso!");
+                            System.out.println(at.getEstadoAtual().getDescricao());
+                            System.out.println("Paciente: " + pacienteExistente.getNome() + ", Medico designado: " + m.getNome() + ", Especialidade do medico: " + m.getEspecialidade());
+                            return;
+                        } else{
+                            System.out.println("Erro: paciente ja esta cadastrado em um atendimento.");
+                        }
                     }
                 }
                 System.out.println("Erro: nao tem nenhum medico cadastrado com essa crm no sistema");

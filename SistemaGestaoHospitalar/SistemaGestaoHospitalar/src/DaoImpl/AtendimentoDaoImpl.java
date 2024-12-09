@@ -4,6 +4,8 @@ import Dao.AtendimentoDao;
 import java.util.ArrayList;
 import java.util.List;
 import sistemagestaohospitalar.Atendimento;
+import sistemagestaohospitalar.Medico;
+import sistemagestaohospitalar.Paciente;
 
 public class AtendimentoDaoImpl implements AtendimentoDao{
     private List<Atendimento> atendimentos;
@@ -14,9 +16,17 @@ public class AtendimentoDaoImpl implements AtendimentoDao{
     }
     
     @Override
-    public void adicionar(Atendimento at) {
+    public boolean adicionar(Atendimento at, Medico m, Paciente p) {
+        for(Atendimento atendimento: atendimentos){
+            if(atendimento.getPaciente().getCpf().equals(p.getCpf())){ //verifica se o paciente ja esta em um atendimento
+                return false;
+            }
+        }
+        
         atendimentos.add(at);
-        at.setId(contador++);
+        at.adicionarMedico(m);
+        at.adicionarPaciente(p);
+        return true;
     }
 
     @Override

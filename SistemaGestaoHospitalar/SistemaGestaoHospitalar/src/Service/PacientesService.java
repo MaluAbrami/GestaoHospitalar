@@ -130,6 +130,8 @@ public class PacientesService {
                         System.out.println("Paciente deletado com sucesso.");
                     else
                         System.out.println("Erro: nao foi possivel deletar o paciente");
+                } else{
+                    System.out.println("Erro: paciente esta ligado a um atendimento, portanto nao pode ser deletado.");
                 }
             } else {
                 System.out.println("Exclusao nao efetuada.");

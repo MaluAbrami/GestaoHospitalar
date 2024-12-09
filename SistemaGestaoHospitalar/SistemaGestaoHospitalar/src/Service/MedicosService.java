@@ -6,10 +6,12 @@ import java.util.Scanner;
 import sistemagestaohospitalar.Medico;
 
 public class MedicosService {
+    private AtendimentoService atendimentoService;
     private MedicoDaoImpl medicoDao;
     private Scanner scanner;
     
-    public MedicosService(MedicoDaoImpl medicoDao, Scanner scanner){
+    public MedicosService(AtendimentoService atendimentoService, MedicoDaoImpl medicoDao, Scanner scanner){
+        this.atendimentoService = atendimentoService;
         this.medicoDao = medicoDao;
         this.scanner = scanner;
     }
@@ -113,7 +115,18 @@ public class MedicosService {
             scanner.skip("\n");
 
             if (resp == 1) {
-                boolean retorno = medicoDao.deletar(cpf);
+                boolean retorno = atendimentoService.contemMedico(procuraMedico); //verifica se o medico esta em um atendimento
+                
+                if(retorno){
+                    retorno = medicoDao.deletar(cpf);
+                    if (retorno)
+                        System.out.println("Medico deletado com sucesso.");
+                    else 
+                        System.out.println("Erro: nao foi possivel deletar o medico.");
+                } else{
+                    System.out.println("Erro: medico esta ligado a um atendimento, portanto nao pode ser deletado.");
+                }
+                retorno = medicoDao.deletar(cpf);
                 if (retorno) {
                     System.out.println("Medico deletado com sucesso.");
                 } else {

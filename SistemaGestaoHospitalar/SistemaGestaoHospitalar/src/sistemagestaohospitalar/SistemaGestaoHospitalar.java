@@ -22,7 +22,7 @@ public class SistemaGestaoHospitalar {
         AtendimentoDaoImpl atendimentoDao = new AtendimentoDaoImpl();
 
         AtendimentoService atendimentoService = new AtendimentoService(atendimentoDao, medicoDao, pacienteDao, scanner);
-        MedicosService medicoService = new MedicosService(medicoDao, scanner);
+        MedicosService medicoService = new MedicosService(atendimentoService, medicoDao, scanner);
         PacientesService pacienteService = new PacientesService(atendimentoService, pacienteDao, scanner);
         
         MedicoView medicoView = new MedicoView(medicoService, scanner);

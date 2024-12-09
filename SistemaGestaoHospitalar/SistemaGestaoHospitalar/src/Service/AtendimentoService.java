@@ -77,9 +77,10 @@ public class AtendimentoService {
                         } else{
                             System.out.println("Erro: paciente ja esta cadastrado em um atendimento.");
                         }
+                    } else{
+                        System.out.println("Erro: nao tem nenhum medico cadastrado com essa crm no sistema");
                     }
                 }
-                System.out.println("Erro: nao tem nenhum medico cadastrado com essa crm no sistema");
             } else{
                 System.out.println("Erro: nao tem nenhum paciente cadastrado com o cpf informado");
             }

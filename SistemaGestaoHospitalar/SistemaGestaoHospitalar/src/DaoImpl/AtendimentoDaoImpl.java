@@ -26,6 +26,7 @@ public class AtendimentoDaoImpl implements AtendimentoDao{
         atendimentos.add(at);
         at.adicionarMedico(m);
         at.adicionarPaciente(p);
+        at.setId(contador++);
         return true;
     }
 

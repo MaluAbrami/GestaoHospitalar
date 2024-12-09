@@ -126,12 +126,6 @@ public class MedicosService {
                     else
                         System.out.println("Erro: nao foi possivel deletar o medico.");
                 }
-                retorno = medicoDao.deletar(cpf);
-                if (retorno) {
-                    System.out.println("Medico deletado com sucesso.");
-                } else {
-                    System.out.println("Erro: nao tem nenhum medico cadastrado com esse cpf.");
-                }
             } else {
                 System.out.println("Exclusao nao efetuada.");
             }

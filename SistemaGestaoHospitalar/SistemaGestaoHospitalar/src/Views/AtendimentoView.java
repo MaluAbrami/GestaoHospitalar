@@ -42,10 +42,11 @@ public class AtendimentoView {
                     break;
                 }
                 case 4:{
-                    
+                    atendimentoService.consultar();
                     break;
                 }
                 case 5:{
+                    atendimentoService.relatorio();
                     break;
                 }
                 case 6:{

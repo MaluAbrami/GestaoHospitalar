@@ -38,9 +38,11 @@ public class AtendimentoView {
                     break;
                 }
                 case 3:{
+                    atendimentoService.excluir();
                     break;
                 }
                 case 4:{
+                    
                     break;
                 }
                 case 5:{

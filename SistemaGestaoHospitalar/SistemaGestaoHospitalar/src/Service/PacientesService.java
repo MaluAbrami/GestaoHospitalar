@@ -1,6 +1,7 @@
 package Service;
 
 import DaoImpl.PacienteDaoImpl;
+import java.util.List;
 import java.util.Scanner;
 import sistemagestaohospitalar.Paciente;
 
@@ -151,6 +152,11 @@ public class PacientesService {
     
     public void relatorio(){
         System.out.println("--==[Relatorio de Pacientes]==--");
-        pacienteDao.listar();
+        List<Paciente> pacientes = pacienteDao.listar();
+        
+        for(Paciente p: pacientes){
+            System.out.println(p.imprimir());
+            System.out.println("\n");
+        }
     }
 }

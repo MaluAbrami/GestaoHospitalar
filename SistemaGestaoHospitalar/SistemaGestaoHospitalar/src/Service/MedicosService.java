@@ -1,6 +1,7 @@
 package Service;
 
 import DaoImpl.MedicoDaoImpl;
+import java.util.List;
 import java.util.Scanner;
 import sistemagestaohospitalar.Medico;
 
@@ -146,6 +147,11 @@ public class MedicosService {
     
     public void relatorio(){
         System.out.println("--==[Relatorio de Medicos]==--");
-        medicoDao.listar();
+        List<Medico> medicos = medicoDao.listar();
+        
+        for(Medico m: medicos){
+            System.out.println(m.imprimir());
+            System.out.println("\n");
+        }
     }
 }

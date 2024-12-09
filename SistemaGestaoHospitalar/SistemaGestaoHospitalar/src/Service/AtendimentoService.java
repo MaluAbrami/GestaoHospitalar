@@ -188,4 +188,32 @@ public class AtendimentoService {
             System.out.println("Erro: nao tem nenhum atendimento cadastrado com esse id.");
         }
     }
+    
+    public void consultar(){
+        int id;
+        
+        System.out.println("--==[Consulta de Atendimento]==--");
+        System.out.println("Qual o ID do atendimento que deseja consultar? ");
+        id = scanner.nextInt();
+        scanner.skip("\n");
+        
+        Atendimento at = atendimentoDao.buscar(id);
+        
+        if(at != null){
+            System.out.println("-=[Dados do Atendimento]=-");
+            System.out.println(at.imprimir());
+        } else{
+            System.out.println("Atendimento nao existe.");
+        }
+    }
+    
+    public void relatorio(){
+        System.out.println("--==[Relatorio de Atendimentos]==--");
+        List<Atendimento> atendimentos = atendimentoDao.listar();
+        
+        for(Atendimento at: atendimentos){
+            System.out.println(at.imprimir());
+            System.out.println("\n");
+        }
+    }
 }

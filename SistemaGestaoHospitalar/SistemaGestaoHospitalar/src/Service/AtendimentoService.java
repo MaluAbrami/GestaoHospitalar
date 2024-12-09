@@ -156,4 +156,36 @@ public class AtendimentoService {
             System.out.println("Erro: nao foi possivel realizar o login.\nVerifique se os dados informados estao corretos e tente novamente.");
         }
     }
+    
+    public void excluir(){
+        int id, resp;
+        
+        System.out.println("--==[Exclusao de Atendimento]==--");
+        System.out.println("Qual o ID do atendimento que deseja excluir? ");
+        id = scanner.nextInt();
+        scanner.skip("\n");
+        
+        Atendimento at = atendimentoDao.buscar(id);
+        
+        if(at != null){
+            System.out.println("-=[Dados do Atendimento]=-");
+            System.out.println(at.imprimir());
+            System.out.println("\nConfirma exclusao? (1-sim/2-nao)");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
+            
+            if(resp == 1){
+                boolean retorno = atendimentoDao.deletar(id);
+                if(retorno){
+                    System.out.println("Atendimento deletado com sucesso.");
+                } else{
+                    System.out.println("Erro: nao tem nenhum atendimento cadastrado com esse id.");
+                }
+            } else{
+                System.out.println("Exclusao nao efetuada.");
+            }
+        } else{
+            System.out.println("Erro: nao tem nenhum atendimento cadastrado com esse id.");
+        }
+    }
 }

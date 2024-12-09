@@ -18,7 +18,7 @@ public class AtendimentoView {
         do{
             System.out.println("--==[Atendimentos]==--");
             System.out.println("1 - Cadastrar");
-            System.out.println("2 - Alterar");
+            System.out.println("2 - Alterar Estado(acesso restrito - apenas medicos)");
             System.out.println("3 - Excluir");
             System.out.println("4 - Consultar");
             System.out.println("5 - Relatorio");
@@ -34,6 +34,7 @@ public class AtendimentoView {
                     break;
                 }
                 case 2:{
+                    atendimentoService.alterarEstado();
                     break;
                 }
                 case 3:{

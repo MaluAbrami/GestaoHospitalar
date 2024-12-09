@@ -51,5 +51,15 @@ public class Atendimento {
     public void setEstadoAtual(Estado estadoAtual) {
         this.estadoAtual = estadoAtual;
     }
-
+    
+    public String imprimir(){
+        StringBuilder report = new StringBuilder();
+        
+        report.append("ID: ").append(id)
+                .append("\nPaciente: ").append(paciente.getNome())
+                .append(", Medico: ").append(medico.getNome())
+                .append(", Estado do Atendimento: ").append(estadoAtual);
+        
+        return report.toString();
+    }
 }

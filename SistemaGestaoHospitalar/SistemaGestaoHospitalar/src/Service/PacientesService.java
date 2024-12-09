@@ -114,21 +114,28 @@ public class PacientesService {
         
         Paciente procuraPaciente = pacienteDao.buscar(cpf);
 
-        System.out.println("-=[Dados do Paciente]=-");
-        System.out.println(procuraPaciente.imprimir());
-        System.out.println("\nConfirma exclusao? (1-sim/2-nao)");
-        resp = scanner.nextInt();
-        scanner.skip("\n");
+        if(procuraPaciente != null){
+            System.out.println("-=[Dados do Paciente]=-");
+            System.out.println(procuraPaciente.imprimir());
+            System.out.println("\nConfirma exclusao? (1-sim/2-nao)");
+            resp = scanner.nextInt();
+            scanner.skip("\n");
 
-        if (resp == 1) {
-            boolean retorno = pacienteDao.deletar(cpf);
-            if(retorno){
-                System.out.println("Paciente deletado com sucesso.");
-            } else{
-                System.out.println("Erro: nao tem nenhum paciente cadastrado com esse cpf.");
+            if (resp == 1) {
+                boolean retorno = atendimentoService.contemPaciente(procuraPaciente);
+                
+                if (retorno) {
+                    retorno = pacienteDao.deletar(cpf);
+                    if (retorno)
+                        System.out.println("Paciente deletado com sucesso.");
+                    else
+                        System.out.println("Erro: nao foi possivel deletar o paciente");
+                }
+            } else {
+                System.out.println("Exclusao nao efetuada.");
             }
-        } else {
-            System.out.println("Exclusao nao efetuada.");
+        } else{
+            System.out.println("Erro: paciente nao existe");
         }
     }
     

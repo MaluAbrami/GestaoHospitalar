@@ -228,4 +228,22 @@ public class AtendimentoService {
             System.out.println("\n");
         }
     }
+    
+    public boolean contemPaciente(Paciente p){
+        List<Atendimento> atendimentos = atendimentoDao.listar();
+        for(Atendimento at: atendimentos){
+            if(at.getPaciente().getCpf().equals(p.getCpf()))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean contemMedico(Medico m){
+        List<Atendimento> atendimentos = atendimentoDao.listar();
+        for(Atendimento at: atendimentos){
+            if(at.getMedico().getCrm().equals(m.getCrm()))
+                return true;
+        }
+        return false;
+    }
 }

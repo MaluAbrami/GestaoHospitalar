@@ -89,10 +89,8 @@ public class AtendimentoService {
         System.out.println("--==[LOGIN]==--");
         System.out.println("Informe seu C.R.M.: ");
         medicoCrm = scanner.nextLine();
-        scanner.skip("\n");
         System.out.println("Informe sua Senha: ");
         medicoSenha = scanner.nextLine();
-        scanner.skip("\n");
         
         boolean retorno = medicoDao.login(medicoCrm, medicoSenha);
         

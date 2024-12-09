@@ -7,6 +7,7 @@ import sistemagestaohospitalar.Atendimento;
 
 public class AtendimentoDaoImpl implements AtendimentoDao{
     private List<Atendimento> atendimentos;
+    private static int contador = 1;
     
     public AtendimentoDaoImpl(){
         this.atendimentos = new ArrayList();
@@ -15,6 +16,7 @@ public class AtendimentoDaoImpl implements AtendimentoDao{
     @Override
     public void adicionar(Atendimento at) {
         atendimentos.add(at);
+        at.setId(contador++);
     }
 
     @Override

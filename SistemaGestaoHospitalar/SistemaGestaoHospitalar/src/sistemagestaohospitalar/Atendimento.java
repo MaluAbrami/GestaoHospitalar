@@ -2,13 +2,11 @@ package sistemagestaohospitalar;
 
 public class Atendimento {
     private int id;
-    private int contadorId = 1;
     private Paciente paciente;
     private Medico medico;
     private Estado estadoAtual;
     
     public Atendimento(){
-        this.id = contadorId++;
         this.estadoAtual = Estado.Entrada;
     }
     
@@ -18,6 +16,10 @@ public class Atendimento {
     
     public int getId(){
         return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     public Paciente getPaciente() {

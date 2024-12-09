@@ -32,7 +32,7 @@ public class PacientesService {
         tel = scanner.nextLine();
         System.out.println("Nome Convenio: ");
         nomeConv = scanner.nextLine();
-        System.out.println("Número Convenio: ");
+        System.out.println("Numero Convenio: ");
         numConv = scanner.nextLine();
         
         Paciente novoPaciente = new Paciente(nome, id, cpf, end, tel, nomeConv, numConv);
@@ -146,7 +146,7 @@ public class PacientesService {
             System.out.println(procuraPaciente.imprimir());
         }
         else{
-            System.out.println("Paciente não existe.");
+            System.out.println("Paciente nao existe.");
         }
     }
     

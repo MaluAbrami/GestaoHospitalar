@@ -118,13 +118,13 @@ public class MedicosService {
                 boolean retorno = atendimentoService.contemMedico(procuraMedico); //verifica se o medico esta em um atendimento
                 
                 if(retorno){
+                    System.out.println("Erro: medico esta ligado a um atendimento, portanto nao pode ser deletado.");
+                } else{
                     retorno = medicoDao.deletar(cpf);
                     if (retorno)
                         System.out.println("Medico deletado com sucesso.");
-                    else 
+                    else
                         System.out.println("Erro: nao foi possivel deletar o medico.");
-                } else{
-                    System.out.println("Erro: medico esta ligado a um atendimento, portanto nao pode ser deletado.");
                 }
                 retorno = medicoDao.deletar(cpf);
                 if (retorno) {

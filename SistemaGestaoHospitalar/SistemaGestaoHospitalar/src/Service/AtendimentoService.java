@@ -152,6 +152,7 @@ public class AtendimentoService {
                     System.out.println("Erro: o estado escolhido eh o mesmo que o estado atual do atendimento.");
                 } else{
                     at.setEstadoAtual(novoEstado);
+                    System.out.println("Estado de atendimento do paciente foi alterado com sucesso.");
                 }
             } else{
                 System.out.println("Atendimento nao cadastrado.");

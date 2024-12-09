@@ -30,6 +30,11 @@ public class SistemaGestaoHospitalar {
         AtendimentoView atendimentoView = new AtendimentoView(atendimentoService, scanner);
         MainView mainView = new MainView(medicoView, pacienteView, atendimentoView, scanner);
         
+        Medico m1 = new Medico("Doutor Joao", "123", "123.456.789-01", "rua xi de agosto", "1599384758", "123-01", "Clinico Geral", "1234-09", "senha123");
+        medicoDao.adicionar(m1);
+        Paciente p1 = new Paciente("Maria Luiza", "12340", "123.456.789-02", "avenida grande", "1599384758", "Unimed", "5435-234");
+        pacienteDao.adicionar(p1);
+        
         mainView.menu();
         
         scanner.close();

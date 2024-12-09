@@ -26,14 +26,16 @@ public class PacienteDaoImpl implements PacienteDao{
     }
 
     @Override
-    public boolean atualizar(Paciente p) {
-        Paciente pacienteAlterar = buscar(p.getCpf());
+    public boolean atualizar(String cpf, Paciente p) {
+        Paciente pacienteAlterar = buscar(cpf);
         if(pacienteAlterar != null){
             for(Paciente pacienteExistente: pacientes){
-                if(pacienteExistente.getIdentidade().equals(p.getIdentidade())
-                        || pacienteExistente.getCpf().equals(p.getCpf())
-                        || pacienteExistente.getNumeroConvenio().equals(p.getNumeroConvenio())){
-                    return false;
+                if(!pacienteExistente.getCpf().equals(cpf)){ //Exclui o paciente que esta sendo alterado para evitar erro de duplicidade
+                    if (pacienteExistente.getIdentidade().equals(p.getIdentidade())
+                            || pacienteExistente.getCpf().equals(p.getCpf())
+                            || pacienteExistente.getNumeroConvenio().equals(p.getNumeroConvenio())) {
+                        return false;
+                    }
                 }
             }
             int posicao = pacientes.indexOf(pacienteAlterar);

@@ -5,7 +5,7 @@ import sistemagestaohospitalar.Medico;
 
 public interface MedicoDao {
     boolean adicionar(Medico m);
-    boolean atualizar(Medico m);
+    boolean atualizar(String cpf, Medico m);
     boolean deletar(String cpf);
     List<Medico> listar();
     Medico buscar(String cpf);

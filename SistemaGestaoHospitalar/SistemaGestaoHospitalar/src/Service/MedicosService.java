@@ -59,7 +59,7 @@ public class MedicosService {
             String nome = capturaAlteracao("Nome", procuraMedico.getNome());
             String id = capturaAlteracao("Identidade", procuraMedico.getIdentidade());
             String novoCpf = capturaAlteracao("CPF", procuraMedico.getCpf());
-            String end = capturaAlteracao("Endereço", procuraMedico.getEndereco());
+            String end = capturaAlteracao("Endereco", procuraMedico.getEndereco());
             String tel = capturaAlteracao("Telefone", procuraMedico.getTelefone());
             String crm = capturaAlteracao("CRM", procuraMedico.getCrm());
             String esp = capturaAlteracao("Especialidade", procuraMedico.getEspecialidade());
@@ -72,7 +72,7 @@ public class MedicosService {
             
             System.out.println("----------------------------------");
             
-            boolean retorno = medicoDao.atualizar(medicoAtualizado);
+            boolean retorno = medicoDao.atualizar(cpf, medicoAtualizado);
             if(retorno){
                 System.out.println("Medico atualizado com sucesso.");
             } else{
@@ -87,12 +87,12 @@ public class MedicosService {
         System.out.println(campo + " atual: " + valorAtual);
         System.out.println("Alterar? (1-sim / 2-nao)");
         int resp = scanner.nextInt();
-        scanner.nextLine(); // Consome a quebra de linha
+        scanner.nextLine();
         if (resp == 1) {
             System.out.println("Digite o novo " + campo + ":");
             return scanner.nextLine();
         }
-        return valorAtual; // Retorna o valor atual caso o usuario nao deseje alterar
+        return valorAtual; 
     }
     
     public void excluir(){
@@ -148,6 +148,9 @@ public class MedicosService {
     public void relatorio(){
         System.out.println("--==[Relatorio de Medicos]==--");
         List<Medico> medicos = medicoDao.listar();
+        
+        if(medicos.isEmpty())
+            System.out.println("Nao tem nenhum medico cadastrado.");
         
         for(Medico m: medicos){
             System.out.println(m.imprimir());

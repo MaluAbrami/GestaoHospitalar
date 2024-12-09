@@ -27,15 +27,17 @@ public class MedicoDaoImpl implements MedicoDao{
     }
 
     @Override
-    public boolean atualizar(Medico m) {
-        Medico medicoAlterar = buscar(m.getCpf());
+    public boolean atualizar(String cpf, Medico m) {
+        Medico medicoAlterar = buscar(cpf);
         if(medicoAlterar != null){
             for (Medico medicoExistente : medicos) {
-                if (medicoExistente.getIdentidade().equals(m.getIdentidade())
-                        || medicoExistente.getCpf().equals(m.getCpf())
-                        || medicoExistente.getCrm().equals(m.getCrm())
-                        || medicoExistente.getCtps().equals(m.getCtps())) {
-                    return false; // Impede a atualizacao por duplicidade de dados
+                if(!medicoExistente.getCpf().equals(cpf)){ //Exclui o medico que esta sendo alterado para evitar erro de duplicidade
+                    if (medicoExistente.getIdentidade().equals(m.getIdentidade())
+                            || medicoExistente.getCpf().equals(m.getCpf())
+                            || medicoExistente.getCrm().equals(m.getCrm())
+                            || medicoExistente.getCtps().equals(m.getCtps())) {
+                        return false; // Impede a atualizacao por duplicidade de dados
+                    }
                 }
             }
             int posicao = medicos.indexOf(medicoAlterar);

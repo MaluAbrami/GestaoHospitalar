@@ -39,6 +39,7 @@ public class AtendimentoService {
                 at.adicionarPaciente(p); //adiciona o paciente ao atendimento
                 System.out.println(at.getEstadoAtual().getDescricao());
                 System.out.println("Paciente: " + p.getNome() + ", Medico designado: " + m.getNome() + ", Especialidade do medico: " + m.getEspecialidade());
+                return;
             }
         }
         System.out.println("Erro: nao tem nenhum medico cadastrado com essa crm no sistema");
@@ -58,15 +59,16 @@ public class AtendimentoService {
             if(pacienteExistente != null){
                 System.out.println("Informe o C.R.M. do medico que sera designado: ");
                 crmMedico = scanner.nextLine();
-
+                
                 for (Medico m : medicosExistentes) {
-                    if (m.getCrm().equals(m.getCrm())) {
+                    if (m.getCrm().equals(crmMedico)) {
                         Atendimento at = new Atendimento();
                         atendimentoDao.adicionar(at);
                         at.adicionarMedico(m); //adiciona o medico ao atendimento
                         at.adicionarPaciente(pacienteExistente); //adiciona o paciente ao atendimento
                         System.out.println(at.getEstadoAtual().getDescricao());
                         System.out.println("Paciente: " + pacienteExistente.getNome() + ", Medico designado: " + m.getNome() + ", Especialidade do medico: " + m.getEspecialidade());
+                        return;
                     }
                 }
                 System.out.println("Erro: nao tem nenhum medico cadastrado com essa crm no sistema");
@@ -210,6 +212,9 @@ public class AtendimentoService {
     public void relatorio(){
         System.out.println("--==[Relatorio de Atendimentos]==--");
         List<Atendimento> atendimentos = atendimentoDao.listar();
+        
+        if(atendimentos.isEmpty())
+            System.out.println("Nao tem nenhum atendimento cadastrado.");
         
         for(Atendimento at: atendimentos){
             System.out.println(at.imprimir());

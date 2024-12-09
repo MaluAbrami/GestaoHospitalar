@@ -80,7 +80,7 @@ public class PacientesService {
             
             System.out.println("----------------------------------");
 
-            boolean retorno = pacienteDao.atualizar(pacienteAtualizado);
+            boolean retorno = pacienteDao.atualizar(cpf, pacienteAtualizado);
             if(retorno){
                 System.out.println("Paciente atualizado com sucesso.");
             } else{
@@ -153,6 +153,9 @@ public class PacientesService {
     public void relatorio(){
         System.out.println("--==[Relatorio de Pacientes]==--");
         List<Paciente> pacientes = pacienteDao.listar();
+        
+        if(pacientes.isEmpty())
+            System.out.println("Nao tem nenhum paciente cadastrado.");
         
         for(Paciente p: pacientes){
             System.out.println(p.imprimir());

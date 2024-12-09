@@ -24,7 +24,7 @@ public class MainView {
             System.out.println("2 - Gerenciar Pacientes");
             System.out.println("3 - Gereciar Atendimentos");
             System.out.println("4 - Sair");
-            System.out.println("Opção: ");
+            System.out.println("Opcao: ");
             
             op = scanner.nextInt();
             scanner.skip("\n");

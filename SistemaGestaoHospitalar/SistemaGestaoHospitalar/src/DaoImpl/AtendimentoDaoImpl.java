@@ -21,8 +21,7 @@ public class AtendimentoDaoImpl implements AtendimentoDao{
             if(atendimento.getPaciente().getCpf().equals(p.getCpf())){ //verifica se o paciente ja esta em um atendimento
                 return false;
             }
-        }
-        
+        } 
         atendimentos.add(at);
         at.adicionarMedico(m);
         at.adicionarPaciente(p);

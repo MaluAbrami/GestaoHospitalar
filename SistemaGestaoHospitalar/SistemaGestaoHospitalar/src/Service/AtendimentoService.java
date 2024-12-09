@@ -148,16 +148,10 @@ public class AtendimentoService {
                     }
                 }
                 
-                Atendimento atAtualizado = new Atendimento(novoEstado);
-                
                 if(novoEstado.equals(estadoAtual)){
                     System.out.println("Erro: o estado escolhido eh o mesmo que o estado atual do atendimento.");
                 } else{
-                    retorno = atendimentoDao.atualizar(idAtendimento, atAtualizado);
-                    if(retorno)
-                        System.out.println("Estado do Atendimento alterado com sucesso.");
-                    else
-                        System.out.println("Erro: nao foi possivel atualizar o atendimento");
+                    at.setEstadoAtual(novoEstado);
                 }
             } else{
                 System.out.println("Atendimento nao cadastrado.");
